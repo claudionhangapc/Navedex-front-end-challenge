@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import AddNaver from '../views/AddNaver.vue'
+import EditNaver from '../views/EditNaver.vue'
 
 Vue.use(VueRouter)
 
@@ -10,7 +13,21 @@ const routes = [
     name: 'Home',
     component: Home
   },
-  
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/adicionar',
+    name: 'Adicionar',
+    component: AddNaver
+  },
+  {
+    path: '/editar',
+    name: 'Editar',
+    component: EditNaver
+  }
 ]
 
 const router = new VueRouter({
