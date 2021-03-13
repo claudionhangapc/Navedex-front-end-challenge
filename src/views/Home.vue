@@ -7,33 +7,37 @@
         <router-link to="/adicionar" tag="button">Adicionar Naver</router-link>
         
        </div>
+      
        <div class="home-container-content">
          <!-- Item - 1 -->
          <div v-for="naver in  navers" v-bind:key="naver.id">
-           <div>
-            <img  class="img-people" src="@/assets/IMG_9945_Juliano_Reis.jpg" alt="">
-           </div>
-           <div class="home-container-content-info">
-             <p class="people-name">
-               {{naver.name}}
-             </p>
-             <p class="people-job">
-              {{naver.job_role}}
-             </p>
-           </div>
-           <div class="home-container-content-alter">
-             <a href="" class="home-container-content-alter-delete">
-              <img  src="@/assets/deletar.svg" alt="">
-            </a>
-            <a href="" class="home-container-content-alter-edit">
-              <img src="@/assets/editar.svg" alt="">
-            </a>
-           </div>
+           <router-link :to="{name:'modalshownaver', params:{id:naver.id}}">
+            <div>
+              <img  class="img-people" src="@/assets/IMG_9945_Juliano_Reis.jpg" alt="">
+            </div>
+            <div class="home-container-content-info">
+              <p class="people-name">
+                {{naver.name}}
+              </p>
+              <p class="people-job">
+                {{naver.job_role}}
+              </p>
+            </div>
+            <div class="home-container-content-alter">
+              <a href="" class="home-container-content-alter-delete">
+                <img  src="@/assets/deletar.svg" alt="">
+              </a>
+              <a href="" class="home-container-content-alter-edit">
+                <img src="@/assets/editar.svg" alt="">
+              </a>
+            </div>
+            </router-link>
          </div>
           <!-- Fim Item - 1 -->   
        </div>
 
      </section>
+      <router-view></router-view>
   </div>
 </template>
 

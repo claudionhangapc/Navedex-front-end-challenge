@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="div-send">
-          <a href=""> Salvar</a>
+          <a href="" v-on:click.prevent=" editarNaver"> Salvar</a>
         </div>
       </div>
 
@@ -58,10 +58,34 @@
 <script>
 // @ is an alias to /src
 import TheHeader from '@/components/TheHeader.vue'
+import { api } from '@/services.js'
+
 export default {
-  name: 'AddNaver',
+  name: 'EditNaver',
+  data(){
+    return{
+      naver:{
+        job_role:"Desenvolvedor",
+        admission_date:"19/08/2018",
+        birthdate:"19/08/2018",
+        project:"Gestore de trafego",
+        name:"Nhanga boy",
+        url:"test-path/image-test.png"
+      }
+    }
+  },
   components: { 
     TheHeader,
+  },
+  methods:{
+    editarNaver(){
+      api.put("/navers/90159f5b-405b-4fee-9f9e-cd01014aff46",this.naver)
+      .then((response)=>{
+         console.log(response);
+      }).catch((error)=>{
+        console.log(error.response.data.message)
+      })
+    }
   }
 }
 </script>

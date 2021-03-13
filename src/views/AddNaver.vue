@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="div-send">
-          <a href="" v-on:click.prevent="AdicionarNaver"> Salvar</a>
+          <a href="" v-on:click.prevent="teste"> Salvar</a>
         </div>
       </div>
 
@@ -59,6 +59,7 @@
 // @ is an alias to /src
 import TheHeader from '@/components/TheHeader.vue'
 import { api } from '@/services.js'
+import {helpers} from '@/helpers.js'
 export default {
   name: 'AddNaver',
   data(){
@@ -87,6 +88,11 @@ export default {
         console.log(error.response.data.message)
       })
      
+    },
+    teste(){
+      let res  = helpers.getAge("1994-04-19");
+      let teste = "2019-08-20T00:00:00.000Z";
+      alert(helpers.getAge(helpers.getOnlyYear(teste)));
     }
   }
 }
