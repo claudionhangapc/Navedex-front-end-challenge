@@ -3,7 +3,7 @@
       <div class="modal-container">
         <button class="btn-close" v-on:click="fecharModalShowNaver"><img src="@/assets/close.png" alt=""></button>
          <div class="modal-container-left">
-           <img src="@/assets/IMG_9945_SHOW.png" alt="">
+           <img src="https://claudionhangapc.com/projetos/navedex/img/IMG_9945_SHOW.png" alt="">
          </div>
          <div class="modal-container-right">
            <div>
@@ -14,12 +14,12 @@
 
             <div class="modal-container-div-margin-botton ">
               <p class="modal-container-info-title">idade</p>
-              <p class="modal-container-info">{{naver.birthdate}}</p>
+              <p class="modal-container-info">{{naver.birthdate | getIdade}}</p>
             </div>
 
             <div class="modal-container-div-margin-botton ">
               <p class="modal-container-info-title">Tempo de empresa</p>
-              <p class="modal-container-info">{{naver.admission_date}}</p>
+              <p class="modal-container-info">{{naver.admission_date |  getTempoEmpresa}}</p>
             </div>
 
             <div >
@@ -30,12 +30,13 @@
 
           <div>
             <div class="modal-container-change">
-              <a href="" class="home-container-content-alter-delete">
-                <img  src="@/assets/deletar.svg" alt="">
-              </a>
-              <a href="" class="home-container-content-alter-edit">
+              <router-link :to="{name:'modaldeletenaver', params:{id:naver.id}}" class="home-container-content-alter-delete">
+                  <img  src="@/assets/deletar.svg" alt="">
+              </router-link>
+                  
+              <router-link :to="{name:'editar', params:{id:naver.id}}" class="home-container-content-alter-edit">
                 <img src="@/assets/editar.svg" alt="">
-              </a>
+              </router-link>
             </div>
           </div>  
          </div>
@@ -45,6 +46,8 @@
 
 <script>
 import { api } from '@/services.js'
+import { helpers } from '@/helpers.js'
+
 
 export default {
   name:"modalshownaver",
@@ -54,6 +57,17 @@ export default {
       naver:null,
       ativaModalShowNaver:false
     }
+  },
+  filters:{
+    getIdade(valor){
+      let ano = helpers.getOnlyYear(valor);
+      return helpers.getAge(ano);
+    },
+    getTempoEmpresa(valor){
+       let ano = helpers.getOnlyYear(valor);
+      return helpers.getAge(ano)+" anos";
+    }
+    
   },
   methods:{
     getNaver(id){
@@ -67,13 +81,14 @@ export default {
     },
     fecharModalShowNaver(){
       this.ativaModalShowNaver = false;
+      this.$router.push('/');
     },
     abrirModalShowNaver(){
        this.ativaModalShowNaver = true;
     },
     fecharModalShowNaverTarget(event){
       if(event.target===event.currentTarget){
-        this.fecharModalShowNaver();
+        this.fecharModalShowNaver();  
       }
     }
   },

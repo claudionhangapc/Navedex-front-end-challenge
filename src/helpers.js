@@ -14,5 +14,63 @@ export const helpers = {
         age--;
     }
     return age;
+  },
+  checkUrl(url){
+    let reg = new RegExp("^https?://(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)$");
+    return reg.test(url);
+  },
+  checkIsOnlyNumber(text){
+
+    let reg=/^[0-9]*[.]?[0-9]*$/;
+    return reg.test(text);
+  },
+  validateTextField(text){
+    let message = "";
+    if(text.length==0){
+      message = "campo o brigatório";
+    }else{
+      // validar o nome
+      if(this.checkIsOnlyNumber(text)){
+        message = "dado inválido, deve conter caracteres"
+      }else{
+        if(text.length<3){
+          message = "dado inválido, deve conter pelo menos 3 caracteres"
+        }
+      }
+    }
+     return message;
+  },
+  validateTextFieldForm(data){
+    let message=null;
+    if(this.validateTextField(data)!=""){
+      message = this.validateTextField(data);
+    }
+    return message
+  },
+  validateDateForm(data){
+    let message=null;
+    if(data==""){
+      message = "campo o brigatório";
+    }
+    return message;
+  },
+  validateUrlForm(url){
+    
+    let message=null;
+    if(url.length==0){
+       message = "campo o brigatório";
+    }else{
+      if(!this.checkUrl(url)){
+        message = "url inválido";
+      }
+    }  
+    return message;
+  },
+   formatDate(data, formato) {
+    if (formato == 'pt-br') {
+      return (data.substr(0, 10).split('-').reverse().join('/'));
+    } else {
+      return (data.substr(0, 10).split('/').reverse().join('-'));
+    }
   }
 }

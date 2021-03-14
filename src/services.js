@@ -25,6 +25,9 @@ export const api = {
   post(endpoint,body){
     return axiosInstance.post(endpoint,body);
   },
+  delete(endpoint){
+    return axiosInstance.delete(endpoint);
+  },
   login(body){
     return  axios.post("https://navedex-api.herokuapp.com/v1/users/login",body);
   },

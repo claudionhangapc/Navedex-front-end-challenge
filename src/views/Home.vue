@@ -1,74 +1,70 @@
 <template>
   <div class="home">
     <TheHeader></TheHeader> 
-    <section class="home-container">
-       <div class="home-container-header">
-        <h2>Navers</h2>
-        <router-link to="/adicionar" tag="button">Adicionar Naver</router-link>
-        
-       </div>
-      
-       <div class="home-container-content">
-         <!-- Item - 1 -->
-         <div v-for="naver in  navers" v-bind:key="naver.id">
-           <router-link :to="{name:'modalshownaver', params:{id:naver.id}}">
-            <div>
-              <img  class="img-people" src="@/assets/IMG_9945_Juliano_Reis.jpg" alt="">
-            </div>
-            <div class="home-container-content-info">
-              <p class="people-name">
-                {{naver.name}}
-              </p>
-              <p class="people-job">
-                {{naver.job_role}}
-              </p>
-            </div>
-            <div class="home-container-content-alter">
-              <a href="" class="home-container-content-alter-delete">
-                <img  src="@/assets/deletar.svg" alt="">
-              </a>
-              <a href="" class="home-container-content-alter-edit">
-                <img src="@/assets/editar.svg" alt="">
-              </a>
-            </div>
-            </router-link>
-         </div>
-          <!-- Fim Item - 1 -->   
-       </div>
-
-     </section>
-      <router-view></router-view>
+      <section class="home-container">
+        <div class="home-container-header">
+          <h2>Navers</h2>
+          <router-link to="/adicionar" tag="button">Adicionar Naver</router-link>
+          
+        </div>
+           <transition>
+          <div class="home-container-content" v-if="this.usuario_navers">
+            <!-- Item  -->
+            <div v-for="naver in  this.usuario_navers" v-bind:key="naver.id">
+              <router-link :to="{name:'modalshownaver', params:{id:naver.id}}">
+                  <div>
+                    <img  class="img-people" src="https://claudionhangapc.com/projetos/navedex/img/IMG_9945_SHOW.png" alt="">
+                  </div>
+                  <div class="home-container-content-info">
+                    <p class="people-name">
+                      {{naver.name}}
+                    </p>
+                    <p class="people-job">
+                      {{naver.job_role}}
+                    </p>
+                  </div>
+                </router-link>
+                <div class="home-container-content-alter">
+                  <router-link :to="{name:'modaldeletenaver', params:{id:naver.id}}" class="home-container-content-alter-delete">
+                     <img  src="@/assets/deletar.svg" alt="icon deletar ">
+                  </router-link>
+                  
+                  <router-link :to="{name:'editar', params:{id:naver.id}}" class="home-container-content-alter-edit">
+                     <img src="@/assets/editar.svg" alt="icon editar ">
+                  </router-link>
+                </div>
+                
+            </div> <!-- fim -->   
+          </div>  </transition>
+      </section>
+      <transition>
+        <router-view></router-view>
+      </transition>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TheHeader from '@/components/TheHeader.vue'
-import { api } from '@/services.js'
+import TheHeader from '@/components/TheHeader.vue';
+import {mapState,mapActions} from "vuex";
+
 export default {
   name: 'Home',
   components: {   
     TheHeader,
   },
-  data(){
-    return{
-      navers:null
-    }
+  computed:{
+    ...mapState(["usuario_navers"])
   },
   methods:{
-    getNavers(){
-      api.get("/navers/")
-      .then(response=>{
-       //console.log(response);
-       this.navers = response.data;
-     });  
-    }
+    ...mapActions(["getUsuarioNavers"])
   },
   created(){
-    this.getNavers();
+    this.getUsuarioNavers(); 
   }
 }
 </script>
+
 <style scoped>
   
   .home{

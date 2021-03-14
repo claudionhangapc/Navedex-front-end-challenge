@@ -2,7 +2,9 @@
     <header>
        <div class="header-container">
         <div>
+          <router-link to="/">
           <img src="@/assets/logo.svg" alt=""> 
+          </router-link>
         </div>
         <div>
           <a href="" v-on:click.prevent="deslogar">Sair</a>

@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <script>
@@ -56,4 +58,17 @@ importando a font
 
  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
  
+
+/*
+* efeito
+*/
+
+.v-enter{
+  opacity: 0;
+  transform:translate3d(-20px,0,0)
+}
+
+.v-enter-active{
+  transition:all .3s;
+}
 </style>

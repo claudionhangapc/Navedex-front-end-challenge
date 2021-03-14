@@ -11,7 +11,8 @@ export default new Vuex.Store({
     usuario:{
       email:"",
       senha:""
-    }
+    },
+    usuario_navers:null
   },
   mutations: {
     UPDATE_LOGIN(state,payload){
@@ -19,9 +20,21 @@ export default new Vuex.Store({
     },
     UPDATE_USUARIO(state,payload){
       state.usuario = payload;
+    },
+    UPDATE_USUARIO_NAVERS(state,payload){
+      state.usuario_navers = payload;
+    },
+    ADD_USUARIO_NAVERS(state,payload){
+      state.usuario_navers.push(payload);
     }
   },
   actions: {
+    getUsuarioNavers(context){
+      api.get("/navers/")
+      .then(response=>{
+        context.commit("UPDATE_USUARIO_NAVERS",response.data)
+      })
+    },
     logarUsuario(context,payload){
       return api.login({
         email:payload.email,

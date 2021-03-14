@@ -13,17 +13,20 @@
 
             <div class="">
               <label for="" class="">Nome</label>
-              <input type="text" class="" placeholder="Nome">
+              <input type="text" class="" placeholder="Nome" v-model="new_naver.name">
+              <p class="error" v-if="msg.name">{{msg.name}} </p>
             </div>
 
             <div class="">
-              <label for="" class="">idade</label>
-              <input type="text" class="" placeholder="idade">
+              <label for="" class="">Data de nascimento</label>
+              <input type="date" v-bind:class="{colorDate:!new_naver.birthdate}" placeholder="idade" v-model="new_naver.birthdate">
+              <p class="error" v-if="msg.birthdate">{{msg.birthdate}}</p>
             </div>
 
             <div class="">
               <label for="" class="">Projetos que participou</label>
-              <input type="text" class="" placeholder="Projetos que participou">
+              <input type="text" v-model="new_naver.project" class="" placeholder="Projetos que participou">
+              <p class="error" v-if="msg.project">{{msg.project}}</p>
             </div>
 
           </div>
@@ -32,26 +35,33 @@
           <div class="create-section-container-content-item">
             <div class="">
               <label for="" class="">Cargo</label>
-              <input type="text" class="" placeholder="Cargo">
+              <input type="text" class="" v-model="new_naver.job_role" placeholder="Cargo">
+              <p class="error" v-if="msg.job_role">{{msg.job_role}}</p>
             </div>
 
             <div class="">
-              <label for="" class="">Tempo de empresa</label>
-              <input type="text" class="" placeholder="Tempo de empresa">
+              <label for="" class="">Data de admissão</label>
+              <input type="date" v-bind:class={colorDate:!new_naver.admission_date} v-model="new_naver.admission_date"  placeholder="Tempo de empresa">
+              <p class="error"  v-if="msg.admission_date">{{msg.admission_date}}</p>
             </div>
 
             <div class="">
               <label for="" class="">URL da foto do Naver</label>
-              <input type="text" class="" placeholder="URL da foto do Naver">
+              <input type="text" v-model="new_naver.url" class="" placeholder="URL da foto do Naver">
+              <p v-if="msg.url" class="error">{{msg.url}}</p>
             </div>
           </div>
         </div>
         <div class="div-send">
-          <a href="" v-on:click.prevent="teste"> Salvar</a>
+          <a href="" v-on:click.prevent="validarFormulario"> Salvar</a>
         </div>
       </div>
 
     </section>
+      <transition>
+         <router-view></router-view>
+      </transition>
+       
   </div>
 </template>
 
@@ -59,40 +69,83 @@
 // @ is an alias to /src
 import TheHeader from '@/components/TheHeader.vue'
 import { api } from '@/services.js'
+import {mapState,mapActions} from "vuex";
 import {helpers} from '@/helpers.js'
 export default {
   name: 'AddNaver',
   data(){
     return{
-      naver:{
-        job_role:"Desenvolvedor",
-        admission_date:"19/08/2018",
+      new_naver:{
+        job_role:"",
+        admission_date:"",
         birthdate:"",
-        project:"Gestore de trafego",
-        name:"ff ",
+        project:"",
+        name:"",
         url:""
-      }
+      },
+      msg:{
+          job_role:null,
+          admission_date:null,
+          birthdate:null,
+          project:null,
+          name:null,
+          url:null
+        }
     }
   },
   components: { 
     TheHeader,
   },
+   computed:{
+    ...mapState(["usuario_navers"])
+  },
   methods:{
-    AdicionarNaver(){
-      api.post("/navers",this.naver)
+    ...mapActions(["getUsuarioNavers"]),
+
+    AdicionarNaver(naver){
+      api.post("/navers",naver)
       .then((response)=>{
-        alert("testet");
-         console.log(response);
+        console.log(response);
+        this.getUsuarioNavers();
+        this.$router.push( {name:'modalcreatnaver'});
       }).catch((error)=>{
         //alert(error.response);
         console.log(error.response.data.message)
-      })
-     
+      })   
     },
-    teste(){
-      let res  = helpers.getAge("1994-04-19");
-      let teste = "2019-08-20T00:00:00.000Z";
-      alert(helpers.getAge(helpers.getOnlyYear(teste)));
+    validarFormulario(){
+
+       this.msg.name = helpers.validateTextFieldForm(this.new_naver.name);
+       this.msg.project = helpers.validateTextFieldForm(this.new_naver.project);
+       this.msg.job_role = helpers.validateTextFieldForm(this.new_naver.job_role);
+
+       this.msg.birthdate= helpers.validateDateForm(this.new_naver.birthdate);
+       this.msg.admission_date= helpers.validateDateForm(this.new_naver. admission_date);
+       this.msg.url = helpers.validateUrlForm(this.new_naver.url);
+      
+        // verificar se existe algum erro no formulario
+       let result = !Object.values(this.msg).every(o => o === null);
+       if(!result){
+         let add_naver = {
+                            job_role:"",
+                            admission_date:"",
+                            birthdate:"",
+                            project:"",
+                            name:"",
+                            url:""
+                      };
+         
+         add_naver.job_role = this.new_naver.job_role;
+         add_naver.project = this.new_naver.project;
+         add_naver.name = this.new_naver.name;
+         add_naver.url = this.new_naver.url;
+
+         add_naver.admission_date =helpers.formatDate(this.new_naver.admission_date,'pt-br');
+         add_naver.birthdate = helpers.formatDate( this.new_naver.birthdate,'pt-br')
+
+         this.AdicionarNaver(add_naver);
+       }
+
     }
   }
 }
@@ -163,15 +216,26 @@ export default {
   line-height: 18px;
 }
 
-.create-section-container-content-item input[type="text"] {
+.create-section-container-content-item input[type="text"],
+.create-section-container-content-item input[type="date"] {
   box-sizing: border-box;
   height: 40px;
   width: 100%;
   padding-left: 8px;
   border: 1px solid #424242;
-}
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #212121;
 
-.create-section-container-content-item input[type="text"]::placeholder {
+}
+.colorDate{color: #9E9E9E}
+.create-section-container-content-item input[type="text"]::placeholder,
+.create-section-container-content-item input[type="date"]::placeholder {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   font-style: normal;
@@ -199,6 +263,11 @@ export default {
   padding: 8px 16px;
   box-sizing: border-box;
   text-decoration: none;
+}
+.error{
+  color: rgb(114, 28, 36);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875em;
 }
 /*
  Pagina Create Mobile
