@@ -55,4 +55,10 @@ export default {
   text-decoration: none;
   color: #000000;
 }
+
+@media (max-width: 576px) {
+  .header-container{
+    
+  }
+}
 </style>

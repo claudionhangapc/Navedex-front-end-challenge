@@ -173,4 +173,17 @@ export default {
     height: 14px;
     width: 14px;
 }
+
+@media (max-width: 576px) {
+  .modal-container{
+    width: 100%;
+  }
+.modal-container-delete{
+  width: 100%;
+}
+.modal-container-delete-item-2{
+  width: 100%;
+}
+
+}
 </style>

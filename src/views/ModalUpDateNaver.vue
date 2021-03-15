@@ -69,11 +69,7 @@ export default {
   height: 233px;*/
   background: #fff;
 }
-.modal-container-delete-item-1{
-  box-sizing: border-box;
-  width: 592px;
-  padding: 32px;
-}
+
 
 .modal-container-delete-item-1-title{
   font-family: "Montserrat", sans-serif;
@@ -172,5 +168,18 @@ export default {
 .btn-close img{
     height: 14px;
     width: 14px;
+}
+
+@media (max-width: 576px) {
+  .modal-container{
+    width: 100%;
+  }
+.modal-container-delete{
+  width: 100%;
+}
+.modal-container-delete-item-2{
+  width: 100%;
+}
+
 }
 </style>

@@ -13,7 +13,7 @@
             <div v-for="naver in  this.usuario_navers" v-bind:key="naver.id">
               <router-link :to="{name:'modalshownaver', params:{id:naver.id}}">
                   <div>
-                    <img  class="img-people" src="https://claudionhangapc.com/projetos/navedex/img/IMG_9945_SHOW.png" alt="">
+                    <img  class="img-people" :src="naver.url" :alt="naver.name">
                   </div>
                   <div class="home-container-content-info">
                     <p class="people-name">
@@ -225,6 +225,8 @@ export default {
   .home-container-header button {
     margin-bottom: 20px;
   }
+
+  .home-container-content{margin-bottom: 150px;}
 }
 
 </style>

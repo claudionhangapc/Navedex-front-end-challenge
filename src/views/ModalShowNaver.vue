@@ -3,7 +3,7 @@
       <div class="modal-container">
         <button class="btn-close" v-on:click="fecharModalShowNaver"><img src="@/assets/close.png" alt=""></button>
          <div class="modal-container-left">
-           <img src="https://claudionhangapc.com/projetos/navedex/img/IMG_9945_SHOW.png" alt="">
+           <img :src="naver.url" :alt="naver.name">
          </div>
          <div class="modal-container-right">
            <div>
@@ -201,5 +201,43 @@ export default {
   height: 14px;
   width: 14px;
 }
+@media (max-width: 576px) {
+  .modal-container{
+    width:280px;
+    flex-direction: column;
+    padding-left: 32px;
+    padding-right: 32px;
+    height: auto;
+    
+  }
+  .modal-container-left{
+   height: 250px;
+  }
+
+.modal-container-right{
+  box-sizing: border-box;
+  padding-left: 30px;
+  padding-top: 16px;
+  background-color: #ffffff;
+  flex:1;
+  }
+  .modal-container-change {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+  .modal-container-div-margin-botton {
+      margin-bottom: 14px;
+      }
+
+  .btn-close {  
+    top: -36px;
+    margin-right: -6px;
+    }
+  
+  .modal-container-naver-name{
+    font-size: 1.25em;
+    line-height: 20px;
+  }
+  }
 
 </style>

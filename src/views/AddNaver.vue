@@ -5,7 +5,7 @@
       <section class="create-section">
       <div class="create-section-container">
         <div class="create-section-container-header">
-          <a href=""> <img src="@/assets/seta.svg" alt=""><span>Adicionar Naver</span></a>
+          <a> <img src="@/assets/seta.svg" alt=""><span>Adicionar Naver</span></a>
         </div>
         <div class="create-section-container-content">
           <!-- Item -1 -->
@@ -61,7 +61,6 @@
       <transition>
          <router-view></router-view>
       </transition>
-       
   </div>
 </template>
 
@@ -165,6 +164,7 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  
 }
 
 .create-section-container-header {
@@ -278,6 +278,7 @@ export default {
     width: 100%;
     align-items: center;
     justify-content: center;
+    margin-bottom: 150px; 
   }
   .create-section-container-header {
     width: 280px;
@@ -288,6 +289,10 @@ export default {
   .div-send {
     display: flex;
     justify-content: center;
+  }
+  header{
+    padding-left:32px;
+    padding-right: 32px;
   }
 }
 

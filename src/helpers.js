@@ -1,4 +1,4 @@
-
+/* eslint-disable no-useless-escape */
 export const helpers = {
   getOnlyYear(string){
     return string.substring(0, 10);
