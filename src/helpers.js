@@ -72,5 +72,30 @@ export const helpers = {
     } else {
       return (data.substr(0, 10).split('/').reverse().join('-'));
     }
+  },
+  validateEmail(text){
+    let message= null
+    let emailPattern =  /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+    if(text.length==0){
+      message = "email deve ser preenchido"
+    }else{
+      if(!emailPattern.test(text)){
+        message = "email incorreto";
+      }
+    }   
+    return  message;
+  },
+  vaildatePassWord(text){
+    let message =null;
+    if(text.length==0){
+      message = "a senha deve ser preenchido"
+    }else{
+      if(text.length<6){
+        message = "senha invalida";
+      }
+    }
+    
+
+    return message;
   }
 }

@@ -16,4 +16,4 @@ copiar o url gerada para o navegador, de modo executar a aplicação.
 ```
 npm run build
 ```
-Obs: para execução plena da aplicação é necessario ter acesso ao usuario e sanha, mais detalhe confira  <a href="https://github.com/naveteam/front-end-challenge">aqui</a>
+Obs: para execução plena da aplicação é necessário ter acesso a um usuário e sanha, para mais detalhe confira  <a href="https://github.com/naveteam/front-end-challenge">aqui</a>

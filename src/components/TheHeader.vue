@@ -57,8 +57,15 @@ export default {
 }
 
 @media (max-width: 576px) {
-  .header-container{
-    
+  
+}
+
+@media (max-width: 1200px) and (min-width: 576px){
+
+  header{ 
+    padding-left: 32px;
+    padding-right: 32px;
   }
+  
 }
 </style>

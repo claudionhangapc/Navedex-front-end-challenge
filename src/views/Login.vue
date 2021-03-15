@@ -14,6 +14,7 @@
             name="email"
             placeholder="Email"
           />
+          <p class="error" v-if="msg.email">{{msg.email}}</p>
         </div>
         <div class="login-container__margin-bottom">
           <label for="" class="login-container__label">Senha</label>
@@ -24,6 +25,7 @@
             class="login-container__input"
             placeholder="Senha"
           />
+          <p class="error" v-if="msg.senha">{{msg.senha}}</p>
         </div>
         <div v-if="errorMessage" class="login-container__margin-bottom errorMessage">
           <label for="" class="login-container__label">{{errorMessage}}</label>
@@ -39,7 +41,7 @@
 <script>
 // @ is an alias to /src
 //import axios from "axios";
-
+import {helpers} from '@/helpers.js'
 export default {
   name: "Login",
   components: {},
@@ -49,19 +51,28 @@ export default {
         email: "",
         senha: "",
       },
+      msg:{
+        senha:null,
+        email: null,
+      },
       errorMessage:null
     }
   },
   methods: {
     logar() {
+      this.msg.email = helpers.validateEmail(this.login.email);
+      this.msg.senha = helpers.vaildatePassWord(this.login.senha);
+      let result = !Object.values(this.msg).every(o => o === null);
+       if(!result){
       this.errorMessage=null;
       this.$store.dispatch("logarUsuario", this.login)
       .then(()=>{
         this.$router.push("/")
       })
-      .catch(erro=>{
-        this.errorMessage = erro.response.data.message;
+      .catch(()=>{
+        this.errorMessage = "email ou senha incorreto";
       })     
+      } 
     }
   }
 };
@@ -170,6 +181,11 @@ export default {
 .login-container__margin-bottom {
   margin-bottom: 32px;
 }
+.error{
+  color: rgb(114, 28, 36);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875em;
+}
 /*
   Pagina index Mobile
 */
@@ -184,4 +200,6 @@ export default {
     width: 100%;
   }
 }
+
+
 </style>

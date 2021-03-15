@@ -236,4 +236,12 @@ export default {
   .home-container-content{margin-bottom: 150px;}
 }
 
+@media (max-width: 1200px) and (min-width: 576px){
+
+.home-container-header{ 
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  
+}
 </style>
