@@ -52,6 +52,9 @@ input:focus {
   outline: none;
 }
 
+a{
+  text-decoration: none;
+}
 /*
 importando a font
  */

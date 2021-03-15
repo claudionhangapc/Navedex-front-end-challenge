@@ -12,8 +12,8 @@
             <!-- Item  -->
             <div v-for="naver in  this.usuario_navers" v-bind:key="naver.id">
               <router-link :to="{name:'modalshownaver', params:{id:naver.id}}">
-                  <div>
-                    <img  class="img-people" :src="naver.url" :alt="naver.name">
+                  <div class="div-img">
+                    <img  class="img-people" :src="naver.url" onerror= " this.onerror=null;this.src='https://claudionhangapc.com/projetos/navedex/img/navedexdefault.png'" :alt="naver.name">
                   </div>
                   <div class="home-container-content-info">
                     <p class="people-name">
@@ -135,6 +135,7 @@ export default {
   cursor: pointer;
 }
 
+
 .home-container-content {
   display: flex;
   justify-content: space-between;
@@ -148,6 +149,12 @@ export default {
   padding-bottom: 35px;
 }
 
+.div-img{
+  height: 280px;
+}
+.div-img img{
+  height: 280px;
+}
 .home-container-content .img-people {
   display: block;
   width: 100%;
