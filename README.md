@@ -16,11 +16,4 @@ copiar o url gerada para o navegador, de modo executar a aplicação.
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Obs: para execução plena da aplicação é necessario ter acesso ao usuario e sanha, mais detalhe confira  <a href="https://github.com/naveteam/front-end-challenge">aqui</a>
