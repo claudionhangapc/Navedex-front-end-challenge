@@ -1,5 +1,7 @@
 # navedex
 
+1. Faça o clone desse repositório;
+2. Acesse a raiz do projeto `cd Navedex-front-end-challenge`;
 ## Project setup
 ```
 npm install
@@ -9,7 +11,7 @@ npm install
 ```
 npm run serve
 ```
-
+copiar o url gerada para o navegador, de modo executar a aplicação.
 ### Compiles and minifies for production
 ```
 npm run build
